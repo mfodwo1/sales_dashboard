@@ -11,7 +11,7 @@ import {
 
 export default function Sidebar() {
   return (
-    <div className="bg-darkGreen text-white h-screen p-4 flex flex-col justify-between">
+    <div className="bg-darkGreen text-lightGray h-screen p-4 flex flex-col justify-between">
       <div>
         <h1 className="text-2xl font-bold mb-8">RB</h1>
         <ul className="space-y-6">

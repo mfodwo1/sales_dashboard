@@ -21,7 +21,7 @@ export default function RevenueChart({ data }: RevenueProps) {
   }));
 
   return (
-    <div className="bg-white shadow-md p-6 rounded-2xl border border-gray-200">
+    <div className="bg-stone-50 shadow-md p-6 rounded-2xl border border-gray-200">
       {/* Header Section */}
       <div className="flex justify-between items-start mb-4 pb-2 border-b border-gray-600">
         <h2 className="text-lg font-bold text-gray-800">Revenue</h2>

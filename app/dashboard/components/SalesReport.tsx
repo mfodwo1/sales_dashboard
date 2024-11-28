@@ -118,7 +118,7 @@ export default function SalesReport({ sales }: SalesProps) {
   const barColors = ["#ADFF2F", "#ADFF2F", "#ADFF2F"]; // Bright green for bars
 
   return (
-    <div className="bg-white shadow-md p-6 rounded-2xl border border-gray-200">
+    <div className="bg-stone-50 shadow-md p-6 rounded-2xl border border-gray-200">
       {/* Header Section */}
       <div className="w-full flex justify-between md:px-6">
         <h2 className="text-lg font-semibold text-center">Sales Report</h2>
