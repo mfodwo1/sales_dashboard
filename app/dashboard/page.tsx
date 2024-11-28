@@ -81,44 +81,50 @@ export default function DashboardPage() {
       <Sidebar />
 
       {/* Main Content */}
-      <div className="flex-1 p-6 overflow-y-auto">
+      <div className="flex-1 overflow-y-auto">
         {/* Header */}
-        <Header title="Sales Admin" />
+        <div className="border-b-2 px-6 py-3">
+          <Header title="Sales Admin" />
+        </div>
 
-        {/* Dashboard Header Information */}
-        <HeaderInfo />
+        <div className="px-6 pb-b">
+          {/* Dashboard Header Information */}
+          <HeaderInfo />
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-          {/* Main Widgets */}
-          <div className="col-span-3">
-            {/* Update Widget */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-              <UpdateWidget update={report.update} />
-              <FinancialWidget
-                title="Net Income"
-                amount={report.net_income.amount}
-                currency={report.net_income.currency}
-                percentageChange={report.net_income.percentage_change}
-              />
-              <FinancialWidget
-                title="Total Return"
-                amount={report.total_return.amount}
-                currency={report.total_return.currency}
-                percentageChange={report.total_return.percentage_change}
-              />
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+            {/* Main Widgets */}
+            <div className="col-span-3">
+              {/* Update Widget */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                <UpdateWidget update={report.update} />
+                <FinancialWidget
+                  title="Net Income"
+                  amount={report.net_income.amount}
+                  currency={report.net_income.currency}
+                  percentageChange={report.net_income.percentage_change}
+                />
+                <FinancialWidget
+                  title="Total Return"
+                  amount={report.total_return.amount}
+                  currency={report.total_return.currency}
+                  percentageChange={report.total_return.percentage_change}
+                />
+              </div>
+
+              {/* Sales and Revenue */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+                <SalesReport sales={report.sales_report} />
+                <RevenueChart data={report.revenue.break_down} />
+              </div>
             </div>
 
-            {/* Sales and Revenue */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
-              <SalesReport sales={report.sales_report} />
-              <RevenueChart data={report.revenue.break_down} />
+            {/* Right Side */}
+            <div className="col-span-1 space-y-4">
+              <TotalViewPerformance
+                performance={report.total_view_performance}
+              />
+              <LevelUpSales />
             </div>
-          </div>
-
-          {/* Right Side */}
-          <div className="col-span-1 space-y-4">
-            <TotalViewPerformance performance={report.total_view_performance} />
-            <LevelUpSales />
           </div>
         </div>
       </div>

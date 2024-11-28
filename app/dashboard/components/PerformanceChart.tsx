@@ -38,7 +38,7 @@ export default function TotalViewPerformance({
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
   return (
-    <div className="bg-white shadow-md p-4 rounded-md">
+    <div className="bg-white shadow-md p-4 rounded-2xl border-2 border-gray-400">
       <h2 className="text-lg font-semibold mb-4">Total View Performance</h2>
       <ResponsiveContainer width="100%" height={300}>
         <PieChart>

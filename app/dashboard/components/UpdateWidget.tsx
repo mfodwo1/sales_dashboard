@@ -8,7 +8,7 @@ type UpdateProps = {
 
 export default function UpdateWidget({ update }: UpdateProps) {
   return (
-    <div className="bg-green-700 text-white p-4 rounded-md">
+    <div className="bg-darkGreen text-white p-4 rounded-2xl border border-gray-400">
       <h2 className="text-lg font-bold">Update</h2>
       <p>{update.date}</p>
       <p>{update.message}</p>

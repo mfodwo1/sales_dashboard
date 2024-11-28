@@ -1,6 +1,6 @@
 export default function LevelUpSales() {
   return (
-    <div className="bg-gray-100 shadow-md p-4 rounded-md mt-6">
+    <div className="bg-gray-100 shadow-md p-4 mt-6 rounded-2xl">
       <h2 className="text-lg font-semibold mb-2">
         Level up your sales management to the next level
       </h2>
