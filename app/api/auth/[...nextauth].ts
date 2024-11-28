@@ -1,32 +1,52 @@
-import NextAuth from 'next-auth';
+import NextAuth, { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import axios from 'axios';
 
-export default NextAuth({
+declare module 'next-auth' {
+  interface Session {
+    accessToken?: string;
+  }
+
+  interface User {
+    accessToken?: string;
+    email?: string;
+  }
+}
+
+declare module 'next-auth/jwt' {
+  interface JWT {
+    accessToken?: string;
+  }
+}
+
+const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        email: { label: 'Email', type: 'email' },
+        email: { label: 'Email', type: 'text' },
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
         try {
           const response = await axios.post(
-            'https://rb-playground.onrender.com/internal/auth_login_create',
+            'https://rb-playground.onrender.com/internal/api/v1/auth/login/',
             {
               email: credentials?.email,
               password: credentials?.password,
-            }
+            },
+            { headers: { 'Content-Type': 'application/json' } }
           );
 
-          if (response.data) {
-            return { ...response.data };
+          const { token, email } = response.data; // Assuming your API returns a token and email.
+
+          if (token) {
+            return { accessToken: token, email }; // Return the token and email as part of the user object
           }
 
           return null;
         } catch (error) {
-          console.error(error);
+          console.error('Error during authentication', error);
           return null;
         }
       },
@@ -34,17 +54,23 @@ export default NextAuth({
   ],
   callbacks: {
     async jwt({ token, user }) {
-      if (user) {
+      if (user?.accessToken) {
         token.accessToken = user.accessToken;
       }
       return token;
     },
     async session({ session, token }) {
-      session.accessToken = token.accessToken;
+      if (token?.accessToken) {
+        session.accessToken = token.accessToken;
+      }
       return session;
     },
   },
   pages: {
     signIn: '/login',
+    error: '/login', // Redirect errors to the login page
   },
-});
+  secret: process.env.NEXTAUTH_SECRET, // Ensure a secret is set in your environment variables
+};
+
+export default NextAuth(authOptions);

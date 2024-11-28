@@ -1,10 +1,9 @@
-'use client';
+"use client";
 
-import { useForm } from 'react-hook-form';
-import axios from 'axios';
-import { signIn } from 'next-auth/react';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 type LoginFormValues = {
   email: string;
@@ -12,25 +11,39 @@ type LoginFormValues = {
 };
 
 export default function LoginPage() {
-  const { register, handleSubmit, formState: { errors } } = useForm<LoginFormValues>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormValues>();
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
   const onSubmit = async (data: LoginFormValues) => {
     try {
-      const result = await signIn('credentials', {
-        email: data.email,
-        password: data.password,
-        redirect: false,
-      });
+      const response = await axios.post(
+        "https://rb-playground.onrender.com/internal/api/v1/auth/login/",
+        {
+          email: data.email,
+          password: data.password,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
 
-      if (result?.error) {
-        setError('Invalid email or password.');
+      const responseData = response.data;
+      if (responseData?.status && responseData?.data?.access) {
+        // Store the access token in local storage
+        localStorage.setItem("accessToken", responseData.data.access);
+
+        // Redirect to the dashboard
+        router.push("/dashboard");
       } else {
-        router.push('/dashboard');
+        setError("Invalid response structure.");
       }
     } catch (err) {
-      setError('Something went wrong. Please try again.');
+      setError("Login failed. Please check your credentials and try again.");
     }
   };
 
@@ -46,21 +59,25 @@ export default function LoginPage() {
         <div className="mb-4">
           <label className="block text-sm font-medium mb-1">Email</label>
           <input
-            {...register('email', { required: 'Email is required' })}
+            {...register("email", { required: "Email is required" })}
             type="email"
             className="w-full px-3 py-2 border rounded-md focus:outline-none"
           />
-          {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+          {errors.email && (
+            <p className="text-red-500 text-sm">{errors.email.message}</p>
+          )}
         </div>
 
         <div className="mb-4">
           <label className="block text-sm font-medium mb-1">Password</label>
           <input
-            {...register('password', { required: 'Password is required' })}
+            {...register("password", { required: "Password is required" })}
             type="password"
             className="w-full px-3 py-2 border rounded-md focus:outline-none"
           />
-          {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
+          {errors.password && (
+            <p className="text-red-500 text-sm">{errors.password.message}</p>
+          )}
         </div>
 
         <button
