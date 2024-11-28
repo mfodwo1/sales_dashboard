@@ -27,7 +27,7 @@ const authOptions: NextAuthOptions = {
         email: { label: 'Email', type: 'text' },
         password: { label: 'Password', type: 'password' },
       },
-      async authorize(credentials) {
+      async authorize(credentials): Promise<any> {
         try {
           const response = await axios.post(
             'https://rb-playground.onrender.com/internal/api/v1/auth/login/',
