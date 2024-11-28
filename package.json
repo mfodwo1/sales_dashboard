@@ -18,7 +18,8 @@
     "next-auth": "^4.24.10",
     "react": "^18",
     "react-dom": "^18",
-    "react-hook-form": "^7.53.2"
+    "react-hook-form": "^7.53.2",
+    "recharts": "^2.13.3"
   },
   "devDependencies": {
     "@types/node": "^20",
