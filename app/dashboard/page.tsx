@@ -59,7 +59,7 @@ export default function DashboardPage() {
           "https://rb-playground.onrender.com/internal/api/v1/report/summary/",
           {
             headers: {
-              Authorization: `Bearer ${session?.user?.access}`,
+              Authorization: `Bearer ${session?.user?.accessToken}`,
             },
           }
         );
@@ -70,7 +70,7 @@ export default function DashboardPage() {
       }
     };
 
-    if (session?.user?.access) {
+    if (session?.user?.accessToken) {
       fetchReport();
     }
   }, [session]);
