@@ -24,9 +24,7 @@ const handler = NextAuth({
 
           if (data.status && data.data?.user) {
             // Extract necessary user information
-            const user = data.data.user;
-
-            console.log(user);
+            const user = data.data;
 
             return user;
           } else {
@@ -41,21 +39,14 @@ const handler = NextAuth({
   ],
   callbacks: {
     async jwt({ token, user }) {
-      if (user) {
-        token.id = user.id;
-        token.accessToken = user.accessToken;
-      }
-      return token;
+      return {...token, ...user};
     },
-    async session({ session, token }) {
-      session.user = {
-        ...session.user, 
-        id: token.id as string, 
-        accessToken: token.accessToken as string,
-      };
+    async session({ session, token, user }) {
+      session.user = token;
       return session;
     },
   },
+  
   
   pages: {
     signIn: "/login", 

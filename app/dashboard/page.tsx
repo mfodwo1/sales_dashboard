@@ -2,17 +2,17 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Header from "./components/Header";
+import { useSession } from "next-auth/react";
 import Sidebar from "./components/Sidebar";
+import Header from "./components/Header";
 import UpdateWidget from "./components/UpdateWidget";
 import FinancialWidget from "./components/FinancialWidget";
 import SalesReport from "./components/SalesReport";
 import RevenueChart from "./components/RevenueChart";
-import PerformanceChart from "./components/PerformanceChart";
+import TotalViewPerformance from "./components/TotalViewPerformance";
 import ErrorMessage from "../components/ErrorMessage";
 import LoadingMessage from "../components/LoadingMessage";
 import HeaderInfo from "./components/HeaderInfo";
-import TotalViewPerformance from "./components/TotalViewPerformance";
 import LevelUpSales from "./components/LevelUpSales";
 
 type ReportData = {
@@ -48,10 +48,9 @@ type ReportData = {
 };
 
 export default function DashboardPage() {
+  const { data: session } = useSession();
   const [report, setReport] = useState<ReportData | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const token =
-    typeof window !== "undefined" ? localStorage.getItem("accessToken") : null;
 
   useEffect(() => {
     const fetchReport = async () => {
@@ -59,18 +58,21 @@ export default function DashboardPage() {
         const response = await axios.get(
           "https://rb-playground.onrender.com/internal/api/v1/report/summary/",
           {
-            headers: { Authorization: `Bearer ${token}` },
+            headers: {
+              Authorization: `Bearer ${session?.user?.access}`,
+            },
           }
         );
-        setReport(response.data?.data);
+        setReport(response.data?.data as ReportData);
       } catch (err) {
         setError("Failed to fetch report. Please try again.");
       }
     };
 
-    if (token) fetchReport();
-    else setError("You are not authenticated. Please log in.");
-  }, [token]);
+    if (session?.user?.access) {
+      fetchReport();
+    }
+  }, [session]);
 
   if (error) return <ErrorMessage message={error} />;
   if (!report) return <LoadingMessage />;
@@ -87,7 +89,7 @@ export default function DashboardPage() {
           <Header title="Sales Admin" />
         </div>
 
-        <div className="px-6 pb-b">
+        <div className="px-6 pb-6">
           {/* Dashboard Header Information */}
           <HeaderInfo />
 
