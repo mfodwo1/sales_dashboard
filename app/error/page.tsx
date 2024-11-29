@@ -1,13 +1,14 @@
-import { useRouter } from "next/router";
+"use client";
+
+import { useRouter } from "next/navigation";
 
 export default function ErrorPage() {
   const router = useRouter();
-  const { error } = router.query;
 
   return (
     <div>
-      <h1>Authentication Error</h1>
-      <p>{error}</p>
+      <h1>Error Page</h1>
+      <button onClick={() => router.push("/")}>Go to Home</button>
     </div>
   );
 }
