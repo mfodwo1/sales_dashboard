@@ -65,6 +65,7 @@ export default function DashboardPage() {
         );
         setReport(response.data?.data as ReportData);
       } catch (err) {
+        console.error("Error fetching report:", err);
         setError("Failed to fetch report. Please try again.");
       }
     };

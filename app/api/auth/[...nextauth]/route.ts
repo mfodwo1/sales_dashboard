@@ -9,7 +9,7 @@ const handler = NextAuth({
         email: { label: "Email", type: "text", placeholder: "email@example.com" },
         password: { label: "Password", type: "password" }
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         try {
           const response = await axios.post(
             "https://rb-playground.onrender.com/internal/api/v1/auth/login/",

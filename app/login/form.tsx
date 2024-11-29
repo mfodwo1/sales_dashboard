@@ -3,6 +3,7 @@
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
+import Image from "next/image";
 
 export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
@@ -25,6 +26,7 @@ export default function LoginPage() {
 
     if (result?.error) {
       setError(result.error);
+      console.error("Error fetching login result:", error);
     } else {
       router.push("/dashboard");
     }
@@ -134,10 +136,13 @@ export default function LoginPage() {
         {/* Right Section - Image */}
         <div className="w-full md:w-1/2 h-64 md:h-auto flex items-center justify-center">
           <div className="w-4/6 mx-auto">
-            <img
+            <Image
               src="/forest_bg.png"
               alt="Forest Background"
-              className="object-cover w-full h-full rounded-3xl"
+              className="object-cover rounded-3xl"
+              width={600}
+              height={400}
+              priority
             />
           </div>
         </div>
