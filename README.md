@@ -1,7 +1,7 @@
 # 🚀 Next.js Application: Login and Dashboard
 
 A **Next.js** project featuring a secure login page and dashboard to display reports.  
-This application is styled with **Tailwind CSS** and includes unit tests using **Jest**.
+This application is styled with **Tailwind CSS** and includes unit tests using **vitest**.
 
 ---
 
@@ -100,6 +100,7 @@ To run tests:
 bash
 Copy code
 npm test
+
 🗂️ GitHub Repository
 Access the full codebase:
 GitHub Repository
@@ -111,22 +112,22 @@ Create a .env file and include the following:
 
 env
 Copy code
-NEXTAUTH_SECRET=VFuNaRHzBVJZD+I2ZqsT20mSNV+Kc+o+Fv0g4O4HHtk=
+NEXTAUTH_SECRET=""
 NEXTAUTH_URL=http://localhost:3000
+
 🛠️ Technologies Used
 Next.js: Framework for building server-rendered React apps.
 TypeScript: Type-safe development.
 Tailwind CSS: Utility-first styling.
 Axios: Simplified API requests.
 react-hook-form: Efficient form handling.
-Jest: Testing framework.
+vitest: Testing framework.
 GitHub Actions: CI/CD pipeline.
 🛡️ CI/CD Pipeline
 Automated with GitHub Actions:
 
-Linting and formatting checks
-Running tests before merging
-📜 License
-This project is licensed under the MIT License.
+Link to the deployed app
+
+- [ https://sales-dashboard-m.vercel.app/](#https://sales-dashboard-m.vercel.app/)
 
 Enjoy exploring the project! 🎉
