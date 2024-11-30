@@ -134,7 +134,7 @@ export default function LoginPage() {
         </div>
 
         {/* Right Section - Image */}
-        <div className="w-full md:w-1/2 h-64 md:h-auto flex items-center justify-center">
+        <div className="w-full md:w-1/2 h-64 md:h-auto hidden md:flex items-center justify-center">
           <div className="w-4/6 mx-auto">
             <Image
               src="/forest_bg.png"
