@@ -128,6 +128,6 @@ Automated with GitHub Actions:
 
 Link to the deployed app
 
-- [ https://sales-dashboard-m.vercel.app/](#https://sales-dashboard-m.vercel.app/)
+https://sales-dashboard-m.vercel.app/
 
 Enjoy exploring the project! 🎉

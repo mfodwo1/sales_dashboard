@@ -2,7 +2,7 @@ import { IoCalendarOutline } from "react-icons/io5";
 
 export default function HeaderInfo() {
   return (
-    <div className="mb-6 flex justify-between w-3/4">
+    <div className="mb-6 block md:flex justify-between w-3/4">
       <div>
         <h1 className="text-2xl font-bold">Dashboard</h1>
         <p className="text-sm text-gray-600">

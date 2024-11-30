@@ -14,6 +14,7 @@ import ErrorMessage from "../components/ErrorMessage";
 import LoadingMessage from "../components/LoadingMessage";
 import HeaderInfo from "./components/HeaderInfo";
 import LevelUpSales from "./components/LevelUpSales";
+import { FaBars } from "react-icons/fa";
 
 type ReportData = {
   update: {
@@ -51,6 +52,9 @@ export default function DashboardPage() {
   const { data: session } = useSession();
   const [report, setReport] = useState<ReportData | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => setSidebarOpen((prev) => !prev);
 
   useEffect(() => {
     const fetchReport = async () => {
@@ -81,13 +85,16 @@ export default function DashboardPage() {
   return (
     <div className="flex h-screen">
       {/* Sidebar */}
-      <Sidebar />
+      <Sidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
 
       {/* Main Content */}
       <div className="flex-1 overflow-y-auto">
         {/* Header */}
-        <div className="border-b-2 px-6 py-3">
+        <div className="border-b-2 px-6 py-3 flex items-center justify-between">
           <Header title="Sales Admin" />
+          <button className="text-lightGray md:hidden" onClick={toggleSidebar}>
+            <FaBars size={24} />
+          </button>
         </div>
 
         <div className="px-6 pb-6">
