@@ -127,6 +127,9 @@ GitHub Actions: CI/CD pipeline.
 Automated with GitHub Actions:
 
 Link to the deployed app
+You can singin using the credentials below 
+email: christianmfodwo343@falsemail.nc
+password: admin@#123
 
 https://sales-dashboard-m.vercel.app/
 
